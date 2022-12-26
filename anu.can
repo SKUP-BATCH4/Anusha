@@ -1,0 +1,42 @@
+/*@!Encoding:1252*/
+includes
+{
+
+}
+
+variables
+{
+  timer st;
+  msTimer mst;
+  message 0x20 msg1;
+  message 0x21 msg2;
+}
+
+
+
+
+on start
+{
+  setTimer(st ,1000);
+  setTimer(mst,75000);
+}
+
+
+on timer st
+{
+  setTimer(st,750);
+  msg1.dlc=1;
+  msg1.byte(0)=0xff;
+  output(msg1);
+}
+
+on timer mst
+{
+  msg2.dlc=1;
+  msg2.byte(0)=0x11;
+  output(msg2);
+}
+on key 'c'
+{
+  cancelTimer(mst);
+}
